@@ -8,19 +8,19 @@ light and slightly dims colors across all faces, working with any theme.
 Examples using `warm-mode-warmth` 0.25 and `warm-mode-dim` 0.9.
 
 **modus-vivendi**
-| Disabled | | Enabled |
-|----------|-|---------|
-| ![modus-vivendi disabled](images/modus-vivendi-disabled.png) | -> | ![modus-vivendi enabled](images/modus-vivendi-enabled.png) |
+| Disabled | Enabled |
+|----------|---------|
+| ![modus-vivendi disabled](images/modus-vivendi-disabled.png) | ![modus-vivendi enabled](images/modus-vivendi-enabled.png) |
 
 **modus-operandi**
-| Disabled | | Enabled |
-|----------|-|---------|
-| ![modus-operandi disabled](images/modus-operandi-disabled.png) | -> | ![modus-operandi enabled](images/modus-operandi-enabled.png) |
+| Disabled | Enabled |
+|----------|---------|
+| ![modus-operandi disabled](images/modus-operandi-disabled.png) | ![modus-operandi enabled](images/modus-operandi-enabled.png) |
 
 **creamy**
-| Disabled | | Enabled |
-|----------|-|---------|
-| ![creamy disabled](images/creamy-disabled.png) | -> | ![creamy enabled](images/creamy-enabled.png) |
+| Disabled | Enabled |
+|----------|---------|
+| ![creamy disabled](images/creamy-disabled.png) | ![creamy enabled](images/creamy-enabled.png) |
 
 ## Installation
 
