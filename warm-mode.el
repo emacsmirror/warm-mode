@@ -154,8 +154,9 @@ Set this variable before loading warm-mode."
   "Add PKGS to `warm-mode-refresh-packages' and set up their hooks.
 Use this to add packages after warm-mode has loaded."
   (dolist (pkg pkgs)
-    (add-to-list 'warm-mode-refresh-packages pkg)
-    (eval-after-load pkg #'warm-mode--refresh)))
+    (unless (memq pkg warm-mode-refresh-packages)
+      (push pkg warm-mode-refresh-packages)
+      (eval-after-load pkg #'warm-mode--refresh))))
 
 (warm-mode--setup-package-hooks)
 
