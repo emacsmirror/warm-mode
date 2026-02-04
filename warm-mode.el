@@ -91,31 +91,21 @@ Value should be between 0.5 (very dim) and 1.0 (no dimming)."
                   result)))
           (error nil)))))
 
-(defun warm-mode--transform-face (face)
-  "Transform a single FACE to warm colors."
-  (let ((fg (face-foreground face nil nil))
-        (bg (face-background face nil nil))
-        warm)
-    (when (and fg (stringp fg) (setq warm (warm-mode--warm-color fg)))
-      (set-face-foreground face warm))
-    (when (and bg (stringp bg) (setq warm (warm-mode--warm-color bg)))
-      (set-face-background face warm))))
-
-(defun warm-mode--store-face (face)
-  "Store original colors for FACE."
-  (let ((fg (face-foreground face nil nil))
-        (bg (face-background face nil nil)))
-    (when (or fg bg)
-      (push (list face fg bg) warm-mode--original-faces))))
-
 (defun warm-mode--apply ()
   "Apply warm color transformation to all faces."
   (setq warm-mode--color-cache (make-hash-table :test 'equal :size 200)
         warm-mode--original-faces nil)
-  (let ((inhibit-redisplay t)
-        (faces (face-list)))
-    (mapc #'warm-mode--store-face faces)
-    (mapc #'warm-mode--transform-face faces))
+  (let ((inhibit-redisplay t))
+    (dolist (face (face-list))
+      (let ((fg (face-foreground face nil nil))
+            (bg (face-background face nil nil))
+            warm)
+        (when (or fg bg)
+          (push (list face fg bg) warm-mode--original-faces))
+        (when (and fg (stringp fg) (setq warm (warm-mode--warm-color fg)))
+          (set-face-foreground face warm))
+        (when (and bg (stringp bg) (setq warm (warm-mode--warm-color bg)))
+          (set-face-background face warm)))))
   (redisplay t))
 
 (defun warm-mode--restore-face (entry)
@@ -137,7 +127,7 @@ Value should be between 0.5 (very dim) and 1.0 (no dimming)."
         warm-mode--original-faces nil))
 
 (defun warm-mode--on-theme-change (&rest _)
-  "Disable warm mode when theme changes."
+  "Disable warm mode when a theme change is detected."
   (when (bound-and-true-p warm-mode)
     (setq warm-mode--color-cache nil
           warm-mode--original-faces nil)
