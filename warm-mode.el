@@ -108,20 +108,17 @@ Value should be between 0.5 (very dim) and 1.0 (no dimming)."
           (set-face-background face warm)))))
   (redisplay t))
 
-(defun warm-mode--restore-face (entry)
-  "Restore original colors for face from ENTRY."
-  (let ((face (car entry))
-        (fg (cadr entry))
-        (bg (caddr entry)))
-    (when (facep face)
-      (set-face-foreground face fg)
-      (set-face-background face bg))))
-
 (defun warm-mode--remove ()
   "Restore original face colors."
   (when warm-mode--original-faces
     (let ((inhibit-redisplay t))
-      (mapc #'warm-mode--restore-face warm-mode--original-faces))
+      (dolist (entry warm-mode--original-faces)
+        (let ((face (car entry))
+              (fg (cadr entry))
+              (bg (caddr entry)))
+          (when (facep face)
+            (set-face-foreground face fg)
+            (set-face-background face bg)))))
     (redisplay t))
   (setq warm-mode--color-cache nil
         warm-mode--original-faces nil))
