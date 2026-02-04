@@ -84,18 +84,21 @@ Set this variable before loading warm-mode."
   (when (and color (stringp color) warm-mode--color-cache)
     (or (gethash color warm-mode--color-cache)
         (condition-case nil
+            ;; Convert color name or hex to RGB floats (0.0-1.0)
             (let ((rgb (color-name-to-rgb color)))
               (when rgb
                 (let* ((r (car rgb))
                        (g (cadr rgb))
                        (b (caddr rgb))
-                       (result (color-rgb-to-hex
-                                (min 1.0 (* (+ r (* warm-mode-warmth 0.4))
-                                            warm-mode-dim))
-                                (* g warm-mode-dim)
-                                (* (max 0.0 (- b warm-mode-warmth))
-                                   warm-mode-dim)
-                                2)))
+                       ;; Red: boost slightly, then dim
+                       (r-warm (min 1.0 (* (+ r (* warm-mode-warmth 0.4))
+                                           warm-mode-dim)))
+                       ;; Green: just dim
+                       (g-warm (* g warm-mode-dim))
+                       ;; Blue: reduce, then dim
+                       (b-warm (* (max 0.0 (- b warm-mode-warmth))
+                                  warm-mode-dim))
+                       (result (color-rgb-to-hex r-warm g-warm b-warm 2)))
                   (puthash color result warm-mode--color-cache)
                   result)))
           (error nil)))))
