@@ -36,8 +36,6 @@ Examples using `warm-mode-warmth` 0.25 and `warm-mode-dim` 0.9.
 
 ## Installation
 
-### Manual
-
 Clone this repository and add to your `load-path`:
 
 ```elisp
