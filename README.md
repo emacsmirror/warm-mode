@@ -3,6 +3,8 @@
 A global minor mode that warms Emacs colors for nighttime coding. Reduces blue
 light and slightly dims colors across all faces, working with any theme.
 
+## Why
+
 System-wide tools like [wlsunset](https://sr.ht/~kennylevinsen/wlsunset/)
 apply a blue light filter to your entire screen. warm-mode is useful when you
 only want the effect in Emacs, leaving other applications unaffected. It also
