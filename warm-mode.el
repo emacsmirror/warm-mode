@@ -143,9 +143,10 @@ Value should be between 0.5 (very dim) and 1.0 (no dimming)."
   "Timer for debounced face refresh after package loads.")
 
 (defun warm-mode--refresh-soon (&rest _)
-  "Schedule a debounced `warm-mode--refresh' after a package loads.
-Resets the timer on each call so that rapid successive loads only
-trigger a single refresh."
+  "Schedule a debounced `warm-mode--refresh' after a file loads.
+Deferred packages define faces on load that need warming.  Resets
+the timer on each call so that rapid successive loads only trigger
+a single refresh."
   (when (bound-and-true-p warm-mode)
     (if (memq warm-mode--refresh-timer timer-list)
         (timer-set-time warm-mode--refresh-timer
