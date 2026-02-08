@@ -1,5 +1,7 @@
 # warm-mode.el
 
+[![MELPA](https://melpa.org/packages/warm-mode-badge.svg)](https://melpa.org/#/warm-mode)
+
 A global minor mode that warms Emacs colors for nighttime coding. Reduces blue
 light and slightly dims colors across all faces, working with any theme.
 
@@ -36,7 +38,15 @@ Examples using `warm-mode-warmth` 0.25 and `warm-mode-dim` 0.9.
 
 ## Installation
 
-Using [use-package](https://github.com/jwiegley/use-package):
+Available on [MELPA](https://melpa.org/#/warm-mode). Using
+[use-package](https://github.com/jwiegley/use-package):
+
+```elisp
+(use-package warm-mode
+  :ensure t)
+```
+
+Or from source:
 
 ```elisp
 (use-package warm-mode
@@ -69,7 +79,7 @@ Example configuration:
 
 ```elisp
 (use-package warm-mode
-  :ensure (:host github :repo "smallwat3r/emacs-warm-mode")
+  :ensure t
   :custom
   (warm-mode-warmth 0.25)
   (warm-mode-dim 0.9))
